@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Modulus',
       ),
-      debugShowCheckedModeBanner: true,
       home: LoginPage(),
     );
   }
