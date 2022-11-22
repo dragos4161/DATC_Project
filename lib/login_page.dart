@@ -1,3 +1,4 @@
+import 'package:city_dangers_alert/register_page.dart';
 import 'package:flutter/material.dart';
 import 'custom_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       GestureDetector(
                         onTap: (){
-                          print('Hello');
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RegisterPage()));
                         },
                         child: Text(
                           'Register',
@@ -122,9 +123,13 @@ class _LoginPageState extends State<LoginPage> {
 
   }
   Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: _emailController.text.trim(),
-        password: _passwordController.text.trim()
-    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim()
+      );
+    } on FirebaseAuthException catch (e){
+    }
   }
+
 }
