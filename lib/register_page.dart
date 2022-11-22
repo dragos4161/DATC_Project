@@ -1,6 +1,11 @@
+import 'package:path/path.dart' as Path;
+import 'package:city_dangers_alert/home_page.dart';
 import 'package:flutter/material.dart';
 import 'custom_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:city_dangers_alert/functions/auth_functions.dart';
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
@@ -60,7 +65,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       GestureDetector(
                         onTap: (){
-                          print('Hello');
+                          if( Navigator.canPop(context)){
+                            Navigator.of(context).pop();
+                          }
+                          else {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const RegisterPage()));
+                          }
                         },
                         child: Text(
                           'Login',
@@ -89,8 +100,8 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         color: Color.fromRGBO(30, 24, 73, 1),
 
-                        onPressed: (){
-                          print('Pressed');
+                        onPressed: () async{
+                          signUp(_emailController.text, _passwordController.text, _nameController.text);
                         },
 
                       ),
@@ -105,4 +116,5 @@ class _RegisterPageState extends State<RegisterPage> {
       ],
     );
   }
+
 }
