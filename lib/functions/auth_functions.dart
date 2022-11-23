@@ -17,13 +17,21 @@ void signUp (String email, String password, String name) async{
     print(e);
   }
   final user = FirebaseAuth.instance.currentUser!;
-  var stud = {
-    'id': user.uid,
-    'name': name,
-    'year': '4',
-    'faculty': 'ETC'
+  var userdta = {
+    "id" : user.uid,
+    "name": name
   };
-  await RemoteServices().postStudent(stud);
 
-
+  await RemoteServices().postUser(userdta);
 }
+
+void signIn(String email, String password) async {
+  try {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password
+    );
+  } on FirebaseAuthException catch (e){
+  }
+}
+
