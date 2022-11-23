@@ -2,8 +2,7 @@ import 'package:city_dangers_alert/register_page.dart';
 import 'package:flutter/material.dart';
 import 'custom_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:city_dangers_alert/functions/auth_functions.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,7 +12,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -21,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   String password = '';
 
   @override
-  void dispose(){
+  void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
 
@@ -35,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/background.jpg'),
+              image: AssetImage('assets/images/background_login.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -58,36 +56,43 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Center(child: CustomInput(icon: Icons.email_outlined,message: 'Enter e-mail',controller_: _emailController, isPassword: false,)),
+                Center(
+                    child: CustomInput(
+                  icon: Icons.email_outlined,
+                  message: 'Enter e-mail',
+                  controller_: _emailController,
+                  isPassword: false,
+                )),
                 SizedBox(height: 30),
-                Center(child: CustomInput(icon: Icons.password_outlined,message: 'Enter password',controller_: _passwordController, isPassword: true)),
+                Center(
+                    child: CustomInput(
+                        icon: Icons.password_outlined,
+                        message: 'Enter password',
+                        controller_: _passwordController,
+                        isPassword: true)),
                 SizedBox(height: 20),
                 Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                          'No Account?  ',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'Modulus',
-                            fontWeight: FontWeight.bold
+                        'No Account?  ',
+                        style: TextStyle(
+                            color: Colors.white, fontSize: 20, fontFamily: 'Modulus', fontWeight: FontWeight.bold
                             //fontFamily: 'Modulus-Bold',
-                          ),
+                            ),
                       ),
                       GestureDetector(
-                        onTap: (){
+                        onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RegisterPage()));
                         },
                         child: Text(
                           'Register',
                           style: TextStyle(
-                            color: Color.fromRGBO(195, 51, 127, 1),
-                            fontSize: 20,
+                              color: Color.fromRGBO(195, 51, 127, 1),
+                              fontSize: 20,
                               fontFamily: 'Modulus',
-                              fontWeight: FontWeight.bold
-                          ),
+                              fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -99,37 +104,24 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Color.fromRGBO(195, 51, 127, 1),
                     radius: 43,
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 10,right: 5),
+                      padding: const EdgeInsets.only(bottom: 10, right: 5),
                       child: IconButton(
-                        icon: Icon(
+                          icon: Icon(
                             Icons.arrow_forward_ios_rounded,
                             size: 43,
-                        ),
-                        color: Color.fromRGBO(30, 24, 73, 1),
-
-                        onPressed: signIn,
-
-                      ),
+                          ),
+                          color: Color.fromRGBO(30, 24, 73, 1),
+                          onPressed: () async {
+                            signIn(_emailController.text, _passwordController.text);
+                          }),
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
         )
       ],
     );
-
   }
-  Future signIn() async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: _emailController.text.trim(),
-          password: _passwordController.text.trim()
-      );
-    } on FirebaseAuthException catch (e){
-    }
-  }
-
 }
