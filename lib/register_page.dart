@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:city_dangers_alert/functions/auth_functions.dart';
+
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
 
@@ -14,7 +15,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
   final _emailController = TextEditingController();
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -30,7 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
         Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/background.jpg'),
+              image: AssetImage('assets/images/background_register.jpg'),
               fit: BoxFit.cover,
             ),
           ),
@@ -43,11 +43,31 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Center(child: CustomInput(icon: Icons.person_outline_outlined,message: 'Enter name',controller_: _nameController, isPassword: false,)),
+                Center(
+                  child: CustomInput(
+                    icon: Icons.person_outline_outlined,
+                    message: 'Enter name',
+                    controller_: _nameController,
+                    isPassword: false,
+                  ),
+                ),
                 SizedBox(height: 30),
-                Center(child: CustomInput(icon: Icons.email_outlined,message: 'Enter e-mail',controller_: _emailController, isPassword: false,)),
+                Center(
+                  child: CustomInput(
+                    icon: Icons.email_outlined,
+                    message: 'Enter e-mail',
+                    controller_: _emailController,
+                    isPassword: false,
+                  ),
+                ),
                 SizedBox(height: 30),
-                Center(child: CustomInput(icon: Icons.password_outlined,message: 'Enter password',controller_: _passwordController, isPassword: true)),
+                Center(
+                  child: CustomInput(
+                      icon: Icons.password_outlined,
+                      message: 'Enter password',
+                      controller_: _passwordController,
+                      isPassword: true),
+                ),
                 SizedBox(height: 20),
                 Center(
                   child: Row(
@@ -56,30 +76,29 @@ class _RegisterPageState extends State<RegisterPage> {
                       Text(
                         'Have Account?  ',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'Modulus',
-                            fontWeight: FontWeight.bold
-                          //fontFamily: 'Modulus-Bold',
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontFamily: 'Modulus',
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       GestureDetector(
-                        onTap: (){
-                          if( Navigator.canPop(context)){
+                        onTap: () {
+                          if (Navigator.canPop(context)) {
                             Navigator.of(context).pop();
-                          }
-                          else {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const RegisterPage()));
+                          } else {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => const RegisterPage()),
+                            );
                           }
                         },
                         child: Text(
                           'Login',
                           style: TextStyle(
-                              color: Color.fromRGBO(195, 51, 127, 1),
-                              fontSize: 20,
-                              fontFamily: 'Modulus',
-                              fontWeight: FontWeight.bold
+                            color: Color.fromRGBO(195, 51, 127, 1),
+                            fontSize: 20,
+                            fontFamily: 'Modulus',
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
@@ -92,23 +111,20 @@ class _RegisterPageState extends State<RegisterPage> {
                     backgroundColor: Color.fromRGBO(195, 51, 127, 1),
                     radius: 43,
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 10,right: 5),
+                      padding: const EdgeInsets.only(bottom: 10, right: 5),
                       child: IconButton(
                         icon: Icon(
                           Icons.arrow_forward_ios_rounded,
                           size: 43,
                         ),
                         color: Color.fromRGBO(30, 24, 73, 1),
-
-                        onPressed: () async{
+                        onPressed: () async {
                           signUp(_emailController.text, _passwordController.text, _nameController.text);
                         },
-
                       ),
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
@@ -116,5 +132,4 @@ class _RegisterPageState extends State<RegisterPage> {
       ],
     );
   }
-
 }
