@@ -17,6 +17,10 @@ class _HomePageState extends State<HomePage> {
   String name = '';
   final user = FirebaseAuth.instance.currentUser!;
 
+  LatLng? dangerPosition;
+
+  bool created = false;
+
   @override
   void initState() {
     super.initState();
@@ -64,7 +68,114 @@ class _HomePageState extends State<HomePage> {
             Icons.add,
             size: 50,
           ),
-          onPressed: () {},
+          onPressed: () {
+            showModalBottomSheet<void>(
+              context: context,
+              isScrollControlled: true,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                ),
+              ),
+              builder: (BuildContext context) {
+                return Container(
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height - 120,
+                  color: Color.fromRGBO(30, 24, 73, 1),
+                  child: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      //mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
+                          height: 600,
+                          child: GridView.builder(
+                              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 50),
+                              itemCount: 6,
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2, mainAxisSpacing: 70, crossAxisSpacing: 70),
+                              itemBuilder: (BuildContext context, int index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      if (dangerPosition != null) {
+                                        created = true;
+                                        markers.add(
+                                            Marker(markerId: MarkerId('$dangerPosition'), position: dangerPosition!));
+                                        dangerPosition = null;
+                                        Navigator.of(context).pop();
+                                      } else {
+                                        created = false;
+                                        Navigator.of(context).pop();
+                                        final snack = SnackBar(
+                                          behavior: SnackBarBehavior.floating,
+                                          margin: EdgeInsets.only(bottom: MediaQuery
+                                              .of(context)
+                                              .size
+                                              .height * 0.5),
+                                          backgroundColor: Color.fromRGBO(195, 51, 127, 0.5),
+                                          content: Text(
+                                            'Choose a place on the map.',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 24,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        );
+                                        ScaffoldMessenger.of(context).showSnackBar(snack);
+                                      }
+                                    });
+                                  },
+                                  child: SizedBox(
+                                    width: 100,
+                                    height: 100,
+                                    child: ClipOval(
+                                      child: Image.asset(
+                                        'assets/images/avatar.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
+                        ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(Color.fromRGBO(195, 51, 127, 0.5)),
+                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0), side: BorderSide(color: Colors.red))),
+                          ),
+                          child: const Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Text(
+                              'CLOSE',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              if (created == false) {
+                                markers.removeWhere((element) => element.position == dangerPosition );
+                                dangerPosition = null;
+                              }
+                              Navigator.pop(context);
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
         ),
         key: drawerKey,
         endDrawer: Drawer(
@@ -221,16 +332,13 @@ class _HomePageState extends State<HomePage> {
                     zoomControlsEnabled: false,
                     onTap: (newPos) {
                       setState(() {
-                        markers.add(Marker(markerId: MarkerId('2'), position: newPos));
+                        created = false;
+                        markers.add(Marker(markerId: MarkerId('$newPos'), position: newPos));
+                        dangerPosition = newPos;
                       });
                     },
                     markers: getmarkers()! //{
-                    // Marker(
-                    //   markerId: MarkerId('initial'),
-                    //   position: _center,
-                    // ),
-                    //},
-                    ),
+                ),
               ),
             ),
           ],
