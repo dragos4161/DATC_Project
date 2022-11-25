@@ -24,18 +24,18 @@ class Dangers {
   String status;
 
   factory Dangers.fromJson(Map<String, dynamic> json) => Dangers(
-    uid: json["uid"],
-    type: json["type"],
-    latitude: json["latitude"].toDouble(),
-    logitude: json["logitude"].toDouble(),
-    status: json["status"],
-  );
+        uid: json["uid"],
+        type: json["type"],
+        latitude: json["latitude"].toDouble(),
+        logitude: json["logitude"].toDouble(),
+        status: json["status"],
+      );
 
   Map<String, dynamic> toJson() => {
-    "uid": uid,
-    "type": type,
-    "latitude": latitude,
-    "logitude": logitude,
-    "status": status,
-  };
+        "uid": uid,
+        "type": type,
+        "latitude": latitude,
+        "logitude": logitude,
+        "status": status,
+      };
 }
