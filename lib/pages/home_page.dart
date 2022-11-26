@@ -1,3 +1,4 @@
+import 'package:city_dangers_alert/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:city_dangers_alert/api/remote_services.dart';
@@ -41,6 +42,15 @@ class _HomePageState extends State<HomePage> {
   late GoogleMapController mapController;
   final LatLng _center = const LatLng(45.753467, 21.225594);
   final Set<Marker> markers = new Set();
+  Set<Circle> circles = Set.from([
+    Circle(
+      strokeWidth: 0,
+      fillColor: Color.fromRGBO(195, 51, 127, 0.5),
+      circleId: CircleId('1'),
+      center: LatLng(45.753467, 21.225594),
+      radius: 500,
+    )
+  ]);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
@@ -80,10 +90,7 @@ class _HomePageState extends State<HomePage> {
               ),
               builder: (BuildContext context) {
                 return Container(
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height - 120,
+                  height: MediaQuery.of(context).size.height - 120,
                   color: Color.fromRGBO(30, 24, 73, 1),
                   child: Center(
                     child: Column(
@@ -104,7 +111,12 @@ class _HomePageState extends State<HomePage> {
                                       if (dangerPosition != null) {
                                         created = true;
                                         markers.add(
-                                            Marker(markerId: MarkerId('$dangerPosition'), position: dangerPosition!));
+                                          Marker(
+                                            markerId: MarkerId('$dangerPosition'),
+                                            position: dangerPosition!,
+                                            draggable: true,
+                                          ),
+                                        );
                                         dangerPosition = null;
                                         Navigator.of(context).pop();
                                       } else {
@@ -112,10 +124,7 @@ class _HomePageState extends State<HomePage> {
                                         Navigator.of(context).pop();
                                         final snack = SnackBar(
                                           behavior: SnackBarBehavior.floating,
-                                          margin: EdgeInsets.only(bottom: MediaQuery
-                                              .of(context)
-                                              .size
-                                              .height * 0.5),
+                                          margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.5),
                                           backgroundColor: Color.fromRGBO(195, 51, 127, 0.5),
                                           content: Text(
                                             'Choose a place on the map.',
@@ -162,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             setState(() {
                               if (created == false) {
-                                markers.removeWhere((element) => element.position == dangerPosition );
+                                markers.removeWhere((element) => element.position == dangerPosition);
                                 dangerPosition = null;
                               }
                               Navigator.pop(context);
@@ -243,7 +252,10 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     onPressed: () {
-                      FirebaseAuth.instance.signOut();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ProfilePage(
+                                name: name,
+                              )));
                     },
                   ),
                 ),
@@ -323,21 +335,30 @@ class _HomePageState extends State<HomePage> {
             Expanded(
               child: Container(
                 child: GoogleMap(
-                    onMapCreated: _onMapCreated,
-                    initialCameraPosition: CameraPosition(
-                      target: _center,
-                      zoom: 14,
-                    ),
-                    myLocationButtonEnabled: true,
-                    zoomControlsEnabled: false,
-                    onTap: (newPos) {
-                      setState(() {
+                  onMapCreated: _onMapCreated,
+                  initialCameraPosition: CameraPosition(
+                    target: _center,
+                    zoom: 14,
+                  ),
+                  myLocationButtonEnabled: true,
+                  zoomControlsEnabled: false,
+                  onTap: (newPos) {
+                    setState(
+                      () {
                         created = false;
-                        markers.add(Marker(markerId: MarkerId('$newPos'), position: newPos));
+                        markers.add(
+                          Marker(
+                            markerId: MarkerId('$newPos'),
+                            position: newPos,
+                            draggable: true,
+                          ),
+                        );
                         dangerPosition = newPos;
-                      });
-                    },
-                    markers: getmarkers()! //{
+                      },
+                    );
+                  },
+                  markers: getmarkers()!,
+                  circles: circles,
                 ),
               ),
             ),
