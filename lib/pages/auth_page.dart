@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:city_dangers_alert/login_page.dart';
-import 'package:city_dangers_alert/register_page.dart';
+import 'package:city_dangers_alert/pages/login_page.dart';
+import 'package:city_dangers_alert/pages/register_page.dart';
 
 
 class AuthPage extends StatefulWidget {

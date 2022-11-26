@@ -1,6 +1,6 @@
-import 'package:city_dangers_alert/register_page.dart';
+import 'package:city_dangers_alert/pages/register_page.dart';
 import 'package:flutter/material.dart';
-import 'custom_input.dart';
+import 'package:city_dangers_alert/custom_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:city_dangers_alert/functions/auth_functions.dart';
 
@@ -79,7 +79,6 @@ class _LoginPageState extends State<LoginPage> {
                         'No Account?  ',
                         style: TextStyle(
                             color: Colors.white, fontSize: 20, fontFamily: 'Modulus', fontWeight: FontWeight.bold
-                            //fontFamily: 'Modulus-Bold',
                             ),
                       ),
                       GestureDetector(

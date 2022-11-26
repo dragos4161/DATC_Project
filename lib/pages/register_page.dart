@@ -1,9 +1,9 @@
 import 'package:path/path.dart' as Path;
-import 'package:city_dangers_alert/home_page.dart';
+import 'package:city_dangers_alert/pages/home_page.dart';
 import 'package:flutter/material.dart';
-import 'custom_input.dart';
+import '../custom_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'firebase_options.dart';
+import '../firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:city_dangers_alert/functions/auth_functions.dart';
 
