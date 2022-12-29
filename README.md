@@ -1,16 +1,25 @@
 # city_dangers_alert
 
-A new Flutter project.
+A project where we combined the front end with the back end to get a functional mobile application
 
-## Getting Started
+## Brief description
 
-This project is a starting point for a Flutter application.
+We used flask from python for the API and the connection with azure
+We created a docker container for the API and used it in an Azure AppService
+Implemented 2 queue triggered Azure Functions in python to deal with the incoming POST requests for creating new users and new dangers
+Implemented 1 time triggered Azure Function in python to create statistics of the total number of dangers and the number of solved dangers
 
-A few resources to get you started if this is your first Flutter project:
+For the Mobile Apps we used Flutter
+We created one mobile app where users can: 
+  -login and register using Google Firebase
+  -view all dangers on the map
+  -mark a new danger on the map
+  -access their profile page where they can see:
+      -the number of dangers they submitted 
+      -the number of solved dangers from their list
+      -a list of all their submitted dangers
+      -the points they accumulated
+And another mobile app, as an admin dashboard where the admin can:
+  -view all the dangers in a list
+  -select individual dangers and either mark them as solved or delete them
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
