@@ -11,15 +11,15 @@ Implemented 1 time triggered Azure Function in python to create statistics of th
 
 For the Mobile Apps we used Flutter
 We created one mobile app where users can: 
-  -login and register using Google Firebase
-  -view all dangers on the map
-  -mark a new danger on the map
-  -access their profile page where they can see:
-      -the number of dangers they submitted 
-      -the number of solved dangers from their list
-      -a list of all their submitted dangers
-      -the points they accumulated
+- login and register using Google Firebase
+- view all dangers on the map
+- mark a new danger on the map
+- access their profile page where they can see:
+  - the number of dangers they submitted 
+  - the number of solved dangers from their list
+  - a list of all their submitted dangers
+  - the points they accumulated
 And another mobile app, as an admin dashboard where the admin can:
-  -view all the dangers in a list
-  -select individual dangers and either mark them as solved or delete them
+- view all the dangers in a list
+- select individual dangers and either mark them as solved or delete them
 
