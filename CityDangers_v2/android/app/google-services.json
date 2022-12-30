@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "1086769164386",
+    "project_id": "citydangersalert-c3b52",
+    "storage_bucket": "citydangersalert-c3b52.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086769164386:android:0e6b7b4eb33cfddf66213b",
+        "android_client_info": {
+          "package_name": "com.example.city_dangers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086769164386-cl19ekbv0uj7rhi9itsi3o0rf19e0a4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBK9d9JbfMBdaZXK-sHn-bWYemn36nQfiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086769164386-cl19ekbv0uj7rhi9itsi3o0rf19e0a4p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1086769164386-aaq46bdrv1l0d8vuleo83spgu2frr5o7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cityDangersAlert"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1086769164386:android:23de0b9a63f23da166213b",
+        "android_client_info": {
+          "package_name": "com.example.city_dangers_alert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1086769164386-cl19ekbv0uj7rhi9itsi3o0rf19e0a4p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBK9d9JbfMBdaZXK-sHn-bWYemn36nQfiA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1086769164386-cl19ekbv0uj7rhi9itsi3o0rf19e0a4p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1086769164386-aaq46bdrv1l0d8vuleo83spgu2frr5o7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cityDangersAlert"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
