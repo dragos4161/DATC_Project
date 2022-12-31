@@ -19,12 +19,12 @@ class _HomePageState extends State<HomePage> {
   static const LatLng center = LatLng(45.753467, 21.225594);
   LatLng? dangerPosition;
   List<String> categories = <String>[
-    'groapa carosabil',
-    'cos gunoi rasturnat',
-    'banca distrusa',
-    'fatada in lucru',
-    'semafor stricat',
-    'semn lipsa'
+    'pothole',
+    'overturned trash can',
+    'destroyed bench',
+    'dangerous building',
+    'broken traffic light',
+    'missing sign'
   ];
   Set<Marker> markers = <Marker>{};
 
@@ -121,6 +121,7 @@ class _HomePageState extends State<HomePage> {
                                         crossAxisSpacing: 20,
                                       ),
                                       itemBuilder: (BuildContext context, int index) {
+
                                         return GestureDetector(
                                           onTap: () async {
                                             if (dangerPosition != null) {
@@ -171,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                                                 height: 100,
                                                 child: ClipOval(
                                                   child: Image.asset(
-                                                    'assets/images/avatar.jpg',
+                                                    'assets/images/${categories[index].split(' ').first}.jpg',
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),

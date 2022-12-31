@@ -210,6 +210,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               padding: const EdgeInsets.all(20),
                               itemCount: dangers.length,
                               itemBuilder: (BuildContext context, int index) {
+                                final String name = dangers[index].type.split(' ').first;
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 40),
                                   child: Container(
@@ -228,7 +229,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                             padding: const EdgeInsets.only(left: 10),
                                             child: ClipOval(
                                               child: Image.asset(
-                                                'assets/images/avatar.jpg',
+                                                'assets/images/$name.jpg',
                                                 width: 60,
                                                 height: 60,
                                                 fit: BoxFit.cover,
@@ -242,6 +243,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: <Widget>[
+                                              Text(
+                                                'Type: ${dangers[index].type}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 15,
+                                              ),
                                               Text(
                                                 'Latitude:${dangers[index].latitude.substring(0, 10)}',
                                                 style: const TextStyle(
